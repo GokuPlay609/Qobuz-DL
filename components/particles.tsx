@@ -177,6 +177,7 @@ const ParticlesComponent = ({ className }: { className: string }) => {
                     exit={{ opacity: 0 }}
                 >
                     <Particles
+                        id={`tsparticles-${settings.backgroundAnimation}`}
                         className={className}
                         options={settings.backgroundAnimation === "particles" ? particlesOptions : starfieldOptions}
                     />
