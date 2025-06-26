@@ -13,9 +13,6 @@ const ParticlesComponent = ({ className }: { className: string }) => {
     const [, setInit] = useState(false);
     const { settings } = useSettings();
 
-    console.log("Current backgroundAnimation setting:", settings.backgroundAnimation);
-    console.log("Options being passed to Particles:", settings.backgroundAnimation === "particles" ? particlesOptions : starfieldOptions);
-
     useEffect(() => {
         initParticlesEngine(async (engine) => {
             await loadSlim(engine);
@@ -165,6 +162,9 @@ const ParticlesComponent = ({ className }: { className: string }) => {
         }),
         [],
     );
+
+    console.log("Current backgroundAnimation setting:", settings.backgroundAnimation);
+    console.log("Options being passed to Particles:", settings.backgroundAnimation === "particles" ? particlesOptions : starfieldOptions);
 
     return (
         <AnimatePresence>
