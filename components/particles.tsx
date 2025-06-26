@@ -21,10 +21,10 @@ const ParticlesComponent = ({ className }: { className: string }) => {
         });
     }, []);
 
-    const baseColor = resolvedTheme !== "light" ? "" : "#FFFFFF";
-    const foregroundColor = resolvedTheme !== "light" ? getHex(String(resolvedTheme), resolvedTheme) : "#000000";
+    const baseColor = resolvedTheme != "light" ? "" : "#FFFFFF";
+    const foregroundColor = resolvedTheme != "light" ? getHex(String(resolvedTheme), resolvedTheme) : "#000000";
 
-    const particlesOptions = useMemo(
+    const options = useMemo(
         () => ({
             background: {
                 color: {
@@ -95,95 +95,19 @@ const ParticlesComponent = ({ className }: { className: string }) => {
         [resolvedTheme],
     );
 
-    const starfieldOptions = useMemo(
-        () => ({
-            background: {
-                color: {
-                    value: "#000000",
-                },
-            },
-            fpsLimit: 60,
-            interactivity: {
-                events: {
-                    onClick: {
-                        enable: true,
-                        mode: "push",
-                    },
-                    onHover: {
-                        enable: true,
-                        mode: "repulse",
-                    },
-                },
-                modes: {
-                    push: {
-                        quantity: 4,
-                    },
-                    repulse: {
-                        distance: 200,
-                        duration: 0.4,
-                    },
-                },
-            },
-            particles: {
-                color: {
-                    value: "#ffffff",
-                },
-                links: {
-                    enable: false,
-                },
-                move: {
-                    direction: "none" as const,
-                    enable: true,
-                    outModes: {
-                        default: "bounce" as const,
-                    },
-                    random: true,
-                    speed: 0.1,
-                    straight: false,
-                },
-                number: {
-                    density: {
-                        enable: true,
-                        area: 800,
-                    },
-                    value: 80,
-                },
-                opacity: {
-                    value: 0.5,
-                },
-                shape: {
-                    type: "circle",
-                },
-                size: {
-                    value: { min: 1, max: 5 },
-                },
-            },
-            detectRetina: true,
-        }),
-        [],
-    );
-
-    return (
+    return <>
         <AnimatePresence>
-            {settings.backgroundAnimation !== "none" && (
-                <motion.div
-                    key={settings.backgroundAnimation}
+            {settings.particles ?
+                <motion.div key="particles"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ type: "spring", duration: 2 }}
                     exit={{ opacity: 0 }}
                 >
-                    <Particles
-                        className={className}
-                        options={settings.backgroundAnimation === "particles" ? particlesOptions : starfieldOptions}
-                    />
-                </motion.div>
-            )}
-            {settings.backgroundAnimation === "none" && (
-                <div className={cn(className, "bg-background")}></div>
-            )}
+                    <Particles className={className} options={options} />
+                </motion.div> : <div className={cn(className, "bg-background")}></div>}
         </AnimatePresence>
-    );
+    </>
 };
 
 export default ParticlesComponent;

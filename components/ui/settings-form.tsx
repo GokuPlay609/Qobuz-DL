@@ -77,15 +77,14 @@ const SettingsForm = () => {
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <Button variant="outline" className="flex gap-2 items-center">
-                                    <p className='capitalize'>{settings.backgroundAnimation}</p>
+                                    <p className='capitalize'>{settings.particles ? "Particles" : "Solid Color"}</p>
                                     <ChevronDownIcon />
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="start">
-                                <DropdownMenuRadioGroup value={settings.backgroundAnimation} onValueChange={(value: "particles" | "starfield" | "none") => { setSettings(prev => ({ ...prev, backgroundAnimation: value })) }}>
+                                <DropdownMenuRadioGroup value={settings.particles ? "particles" : "solid color"} onValueChange={(value: string) => { setSettings(prev => ({ ...prev, particles: value === "particles" })) }}>
                                     <DropdownMenuRadioItem value="particles">Particles</DropdownMenuRadioItem>
-                                    <DropdownMenuRadioItem value="starfield">Starfield</DropdownMenuRadioItem>
-                                    <DropdownMenuRadioItem value="none">Solid Color</DropdownMenuRadioItem>
+                                    <DropdownMenuRadioItem value="solid color">Solid Color</DropdownMenuRadioItem>
                                 </DropdownMenuRadioGroup>
                             </DropdownMenuContent>
                         </DropdownMenu>

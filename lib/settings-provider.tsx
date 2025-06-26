@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
 export type SettingsProps = {
-    backgroundAnimation: "particles" | "starfield" | "none",
+    particles: boolean,
     outputQuality: "27" | "7" | "6" | "5",
     outputCodec: "FLAC" | "WAV" | "ALAC" | "MP3" | "AAC" | "OPUS",
     bitrate: number | undefined,
@@ -15,7 +15,7 @@ export type SettingsProps = {
 
 const isValidSettings = (obj: any): obj is SettingsProps => {
     return (
-        ['particles', 'starfield', 'none'].includes(obj.backgroundAnimation) &&
+        typeof obj.particles === 'boolean' &&
         ['27', '7', '6', '5'].includes(obj.outputQuality) &&
         ['FLAC', 'WAV', 'ALAC', 'MP3', 'AAC', 'OPUS'].includes(obj.outputCodec) &&
         ((typeof obj.bitrate === 'number' && obj.bitrate >= 24 && obj.bitrate <= 320) || obj.bitrate === undefined) &&
@@ -36,7 +36,7 @@ const SettingsContext = createContext<{
 
 export const SettingsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [settings, setSettings] = useState<SettingsProps>( {
-        backgroundAnimation: "particles",
+        particles: true,
         outputQuality: "27",
         outputCodec: "FLAC",
         bitrate: 320,
