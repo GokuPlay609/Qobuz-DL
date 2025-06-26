@@ -19,7 +19,7 @@ const ParticlesComponent = ({ className }: { className: string }) => {
         }).then(() => {
             setInit(true);
         });
-    }, [settings.backgroundAnimation]);
+    }, []);
 
     const baseColor = resolvedTheme !== "light" ? "" : "#FFFFFF";
     const foregroundColor = resolvedTheme !== "light" ? getHex(String(resolvedTheme), resolvedTheme) : "#000000";
